@@ -1,6 +1,7 @@
 import { NextPage } from "next"
 import { useState } from "react";
 
+
 const SignUpPage: NextPage = () => {
 
     const [email,setEmail] = useState("");
@@ -8,14 +9,14 @@ const SignUpPage: NextPage = () => {
     const [password,setPassword] = useState("");
     const [verifyPassword,setVerifyPassword] = useState("");
 
-    const handleSubmit = () => {
-
-    }
+   const clickHandler = () => {
+    console.log("This is a simple test.")
+   }
 
 
     return (
         <div className="flex flex-col justify-center items-center h-full">
-            <h1>Sign Up</h1>
+            <h1 className=" mb-12 text-2xl font-bold">Sign Up with Thwack!</h1>
             <div className="flex justify-evenly items-center flex-col h-80 w-80 border rounded">
                 <div className="flex flex-col">
                     <label htmlFor="email">Email</label>
@@ -33,7 +34,7 @@ const SignUpPage: NextPage = () => {
                     <label htmlFor="password">Verify Password</label>
                     <input type="password" onChange={(e) => setVerifyPassword(e.target.value)}value={verifyPassword} id="password" className="border rounded"/>
                 </div>
-                <button className="border rounded">Submit</button>
+                <button className="border rounded bg-rose-500 w-40 h-10" onClick={clickHandler}>Submit</button>
             </div>
         </div>
     )
