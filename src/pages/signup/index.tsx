@@ -1,8 +1,13 @@
 import { NextPage } from "next"
+import Link from "next/link";
+import { useRouter } from "next/router";
 import { useState } from "react";
+import { z } from "zod";
+
 
 
 const SignUpPage: NextPage = () => {
+    const router = useRouter();
 
     const [email,setEmail] = useState("");
     const [username, setUsername] = useState("");
@@ -10,7 +15,16 @@ const SignUpPage: NextPage = () => {
     const [verifyPassword,setVerifyPassword] = useState("");
 
    const clickHandler = () => {
-    console.log("This is a simple test.")
+    
+    const emailSchema = z.string().email();
+    const userNameSchema = z.string();
+    const passwordSchema = z.string().min(6)
+    
+    const emailResult = emailSchema.safeParse(email);
+
+
+    // router.push("/userpage")
+    
    }
 
 
