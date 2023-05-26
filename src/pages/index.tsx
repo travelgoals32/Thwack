@@ -3,8 +3,13 @@ import Head from "next/head";
 import Link from "next/link";
 import { GlobeAltIcon } from "@heroicons/react/24/outline";
 import { api } from "~/utils/api";
+import {signIn} from "next-auth/react"
+import { useSession } from "next-auth/react";
 
 const Home: NextPage = () => {
+  const {data:session} = useSession();
+
+
   return (
     <>
       <Head>
@@ -17,25 +22,26 @@ const Home: NextPage = () => {
           <div className="text-4xl font-bold ml-1">Thwack</div>
           </div>
           <div className="flex justify-evenly">
-          <Link href="/login">
-              <button className="mr-10 h-10 w-20 rounded border hover:bg-neutral-300 bg-white">
+          {/* <Link href="/login"> */}
+              <button className="mr-10 h-10 w-20 rounded border hover:bg-neutral-300 bg-white"
+              onClick={() => signIn()}>
                 Log In
               </button>
-            </Link>
-            
+            {/* </Link> */}
             </div>
         </div>
         <div className="grid grid-rows-2">
           <div className="flex text-5xl flex-col">
             <h2 className="font-bold m-2 ml-14">Made for people.</h2>
             <h2 className="font-bold text-rose-300 m-2 ml-14">Built for productivity.</h2>
+            {/* { session != null ? <p>{JSON.stringify(session)}</p> : <h1>No session</h1>} */}
           </div>
           <div className="flex m-5">
           <Link href="/signup">
             <button className="ml-10 h-10 w-20 rounded border hover:bg-neutral-300 bg-white w-40">
               Sign Up
             </button>
-            </Link>
+          </Link> 
           </div>
         </div>
       </div>

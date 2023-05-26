@@ -7,6 +7,7 @@ import {
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { env } from "~/env.mjs";
 import { prisma } from "~/server/db";
+import CredentialsProvider from "next-auth/providers/credentials"
 
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
@@ -36,18 +37,44 @@ declare module "next-auth" {
  */
 export const authOptions: NextAuthOptions = {
   callbacks: {
-    session: ({ session, user }) => ({
-      ...session,
-      user: {
-        ...session.user,
-        id: user.id,
-      },
-    }),
-  },
+          session({ session, token }) {
+            if (session.user && token.sub) {
+              session.user.id = token.sub;
+             }
+             return session;
+           }
+      
+          },
   adapter: PrismaAdapter(prisma),
   providers: [
-   
+    CredentialsProvider({
+      name:"Credentials",
+      credentials: {
+        //change this to email
+        username: {label:"username",type:"text",placeholder:"jsmith"},
+        password: {label:"password", type:"text"}
+      },
+      
+      async authorize(credentials,req) {
+        //add the prisma logic here later
+        const user = {id:"1",name:"J Smith", email:"jsmith@gmail.com"}
+
+  
+        if (user) {
+          return user;
+        } else {
+          return null;
+        }
+      }  
+    })
   ],
+  secret:process.env.SECRET,
+  session: {
+    strategy: "jwt"
+  },
+  pages: {
+    signIn:"/login"
+  }
 };
 
 /**

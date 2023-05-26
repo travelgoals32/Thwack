@@ -3,10 +3,12 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { z } from "zod";
-
+import { PrismaClient } from "@prisma/client";
 
 
 const SignUpPage: NextPage = () => {
+    // const prisma = new PrismaClient();
+    
     const router = useRouter();
 
     const [email,setEmail] = useState("");
@@ -23,8 +25,9 @@ const SignUpPage: NextPage = () => {
     const emailResult = emailSchema.safeParse(email);
 
 
+
     // router.push("/userpage")
-    
+
    }
 
 
