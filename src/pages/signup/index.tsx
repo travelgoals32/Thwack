@@ -3,11 +3,11 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { z } from "zod";
-import { PrismaClient } from "@prisma/client";
+
 
 
 const SignUpPage: NextPage = () => {
-    // const prisma = new PrismaClient();
+
     
     const router = useRouter();
 
@@ -16,15 +16,15 @@ const SignUpPage: NextPage = () => {
     const [password,setPassword] = useState("");
     const [verifyPassword,setVerifyPassword] = useState("");
 
-   const clickHandler = () => {
+   const clickHandler = async () => {
     
     const emailSchema = z.string().email();
     const userNameSchema = z.string();
     const passwordSchema = z.string().min(6)
-    
     const emailResult = emailSchema.safeParse(email);
-
-
+    
+    
+    
 
     // router.push("/userpage")
 
