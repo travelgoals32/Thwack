@@ -2,8 +2,8 @@ import { type NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import {ClockIcon, QuestionMarkCircleIcon} from "@heroicons/react/24/outline";
-import {UserIcon} from "@heroicons/react/24/solid";
-import {QueueListIcon,RectangleStackIcon, BookmarkIcon} from "@heroicons/react/24/outline"
+import {UserIcon, ChevronDownIcon} from "@heroicons/react/24/solid";
+import {QueueListIcon,RectangleStackIcon, BookmarkIcon,ClipboardDocumentIcon} from "@heroicons/react/24/outline"
 
 
 
@@ -35,12 +35,14 @@ const Home: NextPage = () => {
         <div className="grid grid-cols-[3fr_10fr] bg-rose-600">
           <div className="bg-stone-400">
 
-            <div className="">
-              <div>
+            <div className=" flex items-center flex-row justify-around h-20 border-white border-b-2">
+              <div className=" flex flex-row items-center font-bold text-white">
                 <h1>My Slack</h1>
+                <ChevronDownIcon className=" h-4 w-4 ml-2"/>
               </div>
-              <div></div>
-              <div></div>
+              <div className=" flex items-center justify-center bg-white h-10 w-10 rounded-3xl ">
+                <ClipboardDocumentIcon className=" h-6 w-6"/>
+              </div>
             </div>
             <div className=" flex flex-col m-8">
               <div className=" h-40 w-40">
